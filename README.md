@@ -5,6 +5,12 @@
 gdown --folder https://drive.google.com/drive/folders/1YN4FEJdWyKzPQziyFFCE7iyipXsVERwp?usp=drive_link
 ```
 
+## Install requirements
+```bash
+pip install -r requirements.txt
+conda install -q bioconda::subread -y
+```
+
 ## Install R, VSCode and Jupyter
 1. Prerequisites Installation:
    - Install R from the official R website (https://www.r-project.org)

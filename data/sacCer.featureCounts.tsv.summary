@@ -1,0 +1,15 @@
+Status	bam/WT_C_1.bam	bam/WT_C_2.bam	bam/WT_C_3.bam	bam/WT_E_1.bam	bam/WT_E_2.bam	bam/WT_E_3.bam
+Assigned	10641971	10188169	10779709	12184691	11871408	12156736
+Unassigned_Unmapped	0	0	0	0	0	0
+Unassigned_Read_Type	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0
+Unassigned_MappingQuality	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0
+Unassigned_MultiMapping	1865316	1855942	2079162	1723830	1575942	1642454
+Unassigned_Secondary	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0
+Unassigned_NoFeatures	677064	758811	753507	861358	992306	820671
+Unassigned_Overlapping_Length	0	0	0	0	0	0
+Unassigned_Ambiguity	567795	552212	579714	541515	522612	531537
