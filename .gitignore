@@ -170,3 +170,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 bam/
+.DS_Store

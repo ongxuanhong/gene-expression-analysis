@@ -1,0 +1,46 @@
+@startuml
+skinparam componentStyle rectangle
+
+component "Raw Data" as raw
+component "Quality Control" as qc
+component "Alignment" as align
+component "Post-processing" as post
+component "Expression Analysis" as expr
+component "Functional Analysis" as func
+
+database "Reference\nGenome" as ref
+database "Gene\nAnnotation" as anno
+
+' Raw data processing
+raw --> qc : FastQC
+qc --> qc : Trimmomatic
+
+' Alignment
+ref --> align : STAR indexing
+qc --> align : STAR alignment
+anno --> align
+
+' Post-processing
+align --> post : BAM files
+post --> post : Picard/RSeQC
+post --> post : featureCounts
+
+' Expression analysis
+post --> expr : Read counts
+expr --> expr : DESeq2
+note right of expr
+  - Size factors
+  - Dispersion
+  - Wald test
+  - DEGs
+end note
+
+' Functional analysis
+expr --> func
+note right of func
+  - GO enrichment
+  - ORA/GSEA
+  - Pathway analysis
+end note
+
+@enduml

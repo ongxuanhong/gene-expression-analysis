@@ -1,0 +1,103 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+rectangle "1. RNA-seq Quantification" as quant {
+    rectangle "Gene Count" {
+        [Raw Counts]
+    }
+    
+    rectangle "Normalization Methods" {
+        [Library size]
+        [Gene length]
+        [Library composition]
+    }
+}
+
+rectangle "2. Differential Expression" as de {
+    rectangle "DESeq2 Pipeline" {
+        [Size factor estimation]
+        [Dispersion estimation]
+        [GLM fitting]
+        [Statistical testing]
+    }
+    
+    rectangle "Visualization" {
+        [Volcano Plot]
+        [MA Plot]
+    }
+}
+
+rectangle "3. Functional Analysis" as func {
+    rectangle "GO/Pathway Analysis" {
+        [Over-representation Analysis\n(ORA)]
+        [Gene Set Enrichment Analysis\n(GSEA)]
+    }
+    
+    rectangle "Databases" {
+        [Gene Ontology (GO)]
+        [KEGG]
+        [Reactome]
+        [MSigDB]
+    }
+}
+
+rectangle "4. Exploratory Analysis" as explore {
+    rectangle "Multivariate Analysis" {
+        [PCA Analysis]
+    }
+    
+    rectangle "Pattern Analysis" {
+        [Hierarchical Clustering]
+        [Sample Correlation]
+    }
+}
+
+' Connections
+[Raw Counts] --> [Library size]
+[Raw Counts] --> [Gene length]
+[Raw Counts] --> [Library composition]
+
+[Library size] --> [Size factor estimation]
+[Gene length] --> [Size factor estimation]
+[Library composition] --> [Size factor estimation]
+
+[Size factor estimation] --> [Dispersion estimation]
+[Dispersion estimation] --> [GLM fitting]
+[GLM fitting] --> [Statistical testing]
+
+[Statistical testing] --> [Volcano Plot]
+[Statistical testing] --> [MA Plot]
+[Statistical testing] --> [Over-representation Analysis\n(ORA)]
+[Statistical testing] --> [Gene Set Enrichment Analysis\n(GSEA)]
+
+[Over-representation Analysis\n(ORA)] --> [Gene Ontology (GO)]
+[Over-representation Analysis\n(ORA)] --> [KEGG]
+[Over-representation Analysis\n(ORA)] --> [Reactome]
+[Gene Set Enrichment Analysis\n(GSEA)] --> [MSigDB]
+
+[Size factor estimation] --> [PCA Analysis]
+[Size factor estimation] --> [Hierarchical Clustering]
+[Size factor estimation] --> [Sample Correlation]
+
+note right of quant
+  Gene counting and normalization
+  accounting for biases
+end note
+
+note right of de
+  DESeq2 workflow for identifying
+  differentially expressed genes
+end note
+
+note right of func
+  Biological interpretation using
+  gene sets and pathways
+end note
+
+note right of explore
+  Data exploration and
+  quality assessment
+end note
+
+@enduml

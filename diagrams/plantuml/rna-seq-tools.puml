@@ -1,0 +1,112 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+' Input files
+rectangle "Input Files" {
+  [FASTQ files] as fastq #LightBlue
+  [Reference Genome] as ref #LightBlue
+  [Gene Annotation\n(GTF/GFF)] as gtf #LightBlue
+}
+
+' Quality Control
+rectangle "Quality Control" {
+  [FastQC] as fastqc
+  [Trimmomatic] as trim
+  [MultiQC] as mqc
+}
+
+' Alignment
+rectangle "Alignment" {
+  [STAR Indexing] as idx
+  [STAR Alignment] as star
+}
+
+' Post-processing
+rectangle "Post-Processing" {
+  [Picard] as pic
+  [RSeQC] as rseqc
+  [featureCounts] as fc
+}
+
+' Expression Analysis
+rectangle "Expression Analysis" {
+  rectangle "Normalization" {
+    [RPKM] as rpkm
+    [FPKM] as fpkm
+    [TPM] as tpm
+  }
+  
+  rectangle "DESeq2" {
+    [Size Factors] as sf
+    [Dispersion Est.] as disp
+    [GLM Fitting] as glm
+    [Statistical Test\n(Wald Test)] as stat
+  }
+}
+
+' Functional Analysis
+rectangle "Functional Analysis" {
+  rectangle "Gene Set Analysis" {
+    [ORA] as ora
+    [GSEA] as gsea
+  }
+  
+  rectangle "Databases" {
+    [Gene Ontology] as go
+    [KEGG] as kegg
+    [Reactome] as reactome
+    [MSigDB] as msig
+  }
+}
+
+' Connections
+fastq --> fastqc
+fastqc --> trim
+trim --> star : Trimmed FASTQ
+
+ref --> idx
+gtf --> idx
+idx --> star
+
+star --> pic : BAM
+star --> rseqc
+pic --> fc
+rseqc --> mqc
+fc --> rpkm : Counts
+fc --> fpkm
+fc --> tpm
+
+fc --> sf : Raw Counts
+sf --> disp
+disp --> glm
+glm --> stat : DEGs
+
+stat --> ora
+stat --> gsea
+
+ora --> go
+ora --> kegg
+ora --> reactome
+ora --> msig
+gsea --> go
+gsea --> kegg
+gsea --> reactome
+gsea --> msig
+
+legend right
+  **File Types**
+  ====
+  FASTQ: Raw sequencing data
+  BAM: Aligned reads
+  GTF/GFF: Gene annotation
+  
+  **Analysis Types**
+  ====
+  QC: Quality Control
+  DEG: Differential Expression Genes
+  ORA: Over-Representation Analysis
+  GSEA: Gene Set Enrichment Analysis
+end legend
+
+@enduml
