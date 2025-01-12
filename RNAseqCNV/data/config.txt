@@ -1,0 +1,3 @@
+out_dir = "RNAseqCNV/output"
+count_dir = "RNAseqCNV/data/read_count"
+snv_dir = "RNAseqCNV/data/snp"
