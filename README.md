@@ -69,3 +69,37 @@ summary(data)
 ggplot(data, aes(x = column1, y = column2)) +
   geom_point()
 ```
+
+## Nextflow (nf-core)
+
+**Install requirements**
+```bash
+conda install bioconda::nextflow -y
+conda install nf-core -y
+```
+
+
+**Run example RNA fusion**
+```bash
+nextflow run nf-core/rnafusion \
+   -profile docker,test \
+   --outdir ./rnafusion\
+   --build_references \
+   -stub
+
+nextflow run nf-core/rnafusion \
+   -profile docker,test \
+   --outdir ./rnafusion_analysis \
+   -stub
+
+   
+nextflow run nf-core/rnafusion \
+    --input nf-core/test-data/samplesheet_valid.csv \
+    --outdir results \
+    --genome GRCh38 \
+    --tools arriba \
+    --max_memory '10.GB' \
+    --max_cpus 4 \
+    -profile docker \
+    -resume   
+```   
