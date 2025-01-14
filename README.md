@@ -103,3 +103,32 @@ nextflow run nf-core/rnafusion \
     -profile docker \
     -resume   
 ```   
+
+Container-based
+```bash
+
+# Build container
+docker build -t nextflow-container .
+
+# Run container
+docker run -it --rm \
+    -v $(pwd):/workspace \
+    nextflow-container bash
+
+# Check Nextflow version
+nextflow -version
+
+# Run test pipeline
+nextflow run hello
+
+# Mount additional volumes if needed
+docker run -it --rm \
+    -v $(pwd):/workspace \
+    -v /path/to/data:/data \
+    nextflow-container bash
+
+# Run pipeline
+nextflow run nf-core/rnafusion \
+    --input samples.csv \
+    --outdir results
+```    

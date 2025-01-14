@@ -172,3 +172,4 @@ cython_debug/
 bam/
 .DS_Store
 RNAseqCNV/
+rnafusion/
