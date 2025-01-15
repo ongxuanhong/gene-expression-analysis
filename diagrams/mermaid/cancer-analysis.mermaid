@@ -1,0 +1,41 @@
+graph TD
+    A[NGS Data] --> B[Quality Control]
+    B --> C[Data Processing]
+
+    C --> D1[Genomic Analysis]
+    C --> D2[Transcriptomics]
+    C --> D3[Epigenetics]
+    C --> D4[Other Omics]
+
+    D1 --> E1[SNV/Indel Analysis]
+    D1 --> E2[CNV Analysis]
+    D1 --> E3[Gene Fusion]
+    D1 --> E4[Structural Variants]
+
+    D2 --> F1[Gene Expression]
+    D2 --> F2[Alternative Splicing]
+    D2 --> F3[Non-coding RNA]
+    D2 --> F4[Pathway Analysis]
+
+    D3 --> G1[DNA Methylation]
+    D3 --> G2[Histone Modifications]
+    D3 --> G3[Chromatin Structure]
+
+    D4 --> H1[Proteomics]
+    D4 --> H2[Metabolomics]
+    D4 --> H3[Single-cell Analysis]
+
+    E1 & E2 & E3 & E4 --> I1[Genomic Integration]
+    F1 & F2 & F3 & F4 --> I2[Expression Integration]
+    G1 & G2 & G3 --> I3[Epigenetic Integration]
+    H1 & H2 & H3 --> I4[Multi-omics Integration]
+
+    I1 & I2 & I3 & I4 --> J[Systems Biology Analysis]
+
+    J --> K1[Clinical Applications]
+    J --> K2[Drug Development]
+    J --> K3[Biomarker Discovery]
+    J --> K4[Patient Stratification]
+
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style J fill:#5c5,stroke:#333,stroke-width:4px
