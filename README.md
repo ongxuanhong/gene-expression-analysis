@@ -102,6 +102,14 @@ nextflow run nf-core/rnafusion \
     --max_cpus 4 \
     -profile docker \
     -resume   
+
+nextflow run nf-core/rnafusion \
+    --input nf-core/test-data/samplesheet_valid.csv \
+    --outdir results \
+    --genome GRCh38 \
+    --tools arriba \
+    --max_memory '30.GB' \
+    -profile singularity    
 ```   
 
 Container-based
