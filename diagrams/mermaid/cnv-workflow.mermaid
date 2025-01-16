@@ -1,0 +1,57 @@
+flowchart TB
+    input1[/Input: Raw Sequencing Data\nFASTQ files/]
+    input2[/Reference Genome\n.fasta/]
+    
+    subgraph QC["Quality Control"]
+        qc1[FastQC]
+        qc2[Trimming]
+        qc3[Adapter Removal]
+        qc1 --> qc2 --> qc3
+    end
+
+    subgraph Alignment["Read Alignment"]
+        align1[BWA-MEM Alignment]
+        align2[Mark Duplicates]
+        align3[Base Recalibration]
+        align1 --> align2 --> align3
+    end
+
+    subgraph CNV["CNV Detection"]
+        direction TB
+        cnv1[Read Depth Calculation]
+        cnv2[GC Bias Correction]
+        cnv3[Normalization]
+        cnv4[Segmentation]
+        cnv5[CNV Calling]
+        cnv1 --> cnv2 --> cnv3 --> cnv4 --> cnv5
+    end
+
+    subgraph Filtering["Post-Processing"]
+        filt1[Quality Filtering]
+        filt2[Merge Segments]
+        filt3[Annotation]
+        filt1 --> filt2 --> filt3
+    end
+
+    output1[/CNV Calls\n.vcf/]
+    output2[/Coverage Plots/]
+    output3[/Quality Report/]
+
+    input1 --> QC
+    input2 --> Alignment
+    QC --> Alignment
+    Alignment --> CNV
+    CNV --> Filtering
+    Filtering --> output1
+    Filtering --> output2
+    Filtering --> output3
+
+    style QC fill:#e1f5fe
+    style Alignment fill:#e8f5e9
+    style CNV fill:#fff3e0
+    style Filtering fill:#f3e5f5
+    
+    classDef input fill:#dcedc8,stroke:#33691e
+    classDef output fill:#ffccbc,stroke:#bf360c
+    class input1,input2 input
+    class output1,output2,output3 output

@@ -144,16 +144,16 @@ nextflow run nf-core/rnafusion \
 ## How to export mermaid graph
 ```bash
 # Using mermaid-cli Docker image
-docker run --rm -v $(pwd):/data minlag/mermaid-cli -i data/cancer-analysis.mermaid -o data/cancer-analysis.png
+docker run --rm -v $(pwd):/data minlag/mermaid-cli -i mermaid/cancer-analysis.mermaid -o mermaid/cancer-analysis.png
 
 docker run --rm -v $(pwd):/data minlag/mermaid-cli \
-    -i data/cancer-analysis.mermaid \
-    -o data/cancer-analysis.svg
+    -i mermaid/cancer-analysis.mermaid \
+    -o mermaid/cancer-analysis.svg
 
 
 docker run --rm -v $(pwd):/data minlag/mermaid-cli \
-    -i data/cancer-analysis.mermaid \
-    -o data/cancer-analysis.png \
+    -i mermaid/cancer-analysis.mermaid \
+    -o mermaid/cancer-analysis.png \
     -b transparent \
     -w 3840 \
     -H 2160 \
@@ -161,7 +161,7 @@ docker run --rm -v $(pwd):/data minlag/mermaid-cli \
     -q 1.0    
 
 docker run --rm -v $(pwd):/data minlag/mermaid-cli \
-    -i data/cancer-analysis.mermaid \
-    -o data/cancer-analysis.pdf \
+    -i mermaid/cancer-analysis.mermaid \
+    -o mermaid/cancer-analysis.pdf \
     -w 4096
 ```

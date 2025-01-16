@@ -1,0 +1,78 @@
+flowchart TB
+    input1[/Input: RNA-seq Data\nPaired-end FASTQ/]
+    input2[/Reference Genome\n.fasta/]
+    input3[/Gene Annotations\nGTF/]
+    
+    subgraph QC["Quality Control"]
+        qc1[FastQC]
+        qc2[Trimmomatic]
+        qc3[MultiQC Report]
+        qc1 --> qc2 --> qc3
+    end
+
+    subgraph Alignment["Read Processing"]
+        align1[STAR Alignment]
+        align2[Split Reads Detection]
+        align3[Discordant Pairs]
+        align1 --> align2
+        align1 --> align3
+    end
+
+    subgraph FusionDetection["Fusion Detection Tools"]
+        direction TB
+        fd1[STAR-Fusion]
+        fd2[Arriba]
+        fd3[FusionCatcher]
+    end
+
+    subgraph Filtering["Fusion Filtering"]
+        filt1[Known Artifacts Removal]
+        filt2[Expression Filter]
+        filt3[Breakpoint Filter]
+        filt4[Merge Results]
+        filt1 --> filt2 --> filt3 --> filt4
+    end
+
+    subgraph Annotation["Annotation & Visualization"]
+        ann1[Gene Annotation]
+        ann2[Protein Domain]
+        ann3[Known Fusions Check]
+        ann4[Fusion Plots]
+        ann1 --> ann2 --> ann3 --> ann4
+    end
+
+    output1[/Fusion Calls\n.tsv/]
+    output2[/Fusion Plots\n.pdf/]
+    output3[/QC Report/]
+    output4[/IGV Visualization/]
+
+    input1 --> QC
+    input2 --> Alignment
+    input3 --> Alignment
+    QC --> Alignment
+    
+    Alignment --> fd1
+    Alignment --> fd2
+    Alignment --> fd3
+    
+    fd1 --> Filtering
+    fd2 --> Filtering
+    fd3 --> Filtering
+    
+    Filtering --> Annotation
+    
+    Annotation --> output1
+    Annotation --> output2
+    QC --> output3
+    Annotation --> output4
+
+    style QC fill:#e1f5fe
+    style Alignment fill:#e8f5e9
+    style FusionDetection fill:#fff3e0
+    style Filtering fill:#f3e5f5
+    style Annotation fill:#ffecb3
+    
+    classDef input fill:#dcedc8,stroke:#33691e
+    classDef output fill:#ffccbc,stroke:#bf360c
+    class input1,input2,input3 input
+    class output1,output2,output3,output4 output
