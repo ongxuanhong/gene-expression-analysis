@@ -173,3 +173,4 @@ bam/
 .DS_Store
 RNAseqCNV/
 rnafusion/
+raw_data/

@@ -1,0 +1,2 @@
+Sample	Unique Reads	Duplicate Reads
+Tien_Cont1_S25_R1_001	18003282.0	24051668.0
