@@ -6,6 +6,9 @@ mkdir -p multiqc_results
 # conda install -c bioconda fastqc multiqc -y
 fastqc \
   raw_data/Tien_Cont1_S25_R1_001.fastq.gz \
+  raw_data/Tien_Cont1_S25_R2_001.fastq.gz \
+  raw_data/Tien_Zn2_S29_R1_001.fastq.gz \
+  raw_data/Tien_Zn2_S29_R2_001.fastq.gz \
   --outdir fastqc_results \
   --threads 4
 

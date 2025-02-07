@@ -1,0 +1,5 @@
+Sample	Top overrepresented sequence	Sum of remaining overrepresented sequences
+Tien_Cont1_S25_R1_001	0.4313047572283405	0.0
+Tien_Cont1_S25_R2_001	0.0	0.0
+Tien_Zn2_S29_R1_001	2.0159817512892797	1.1927514279099602
+Tien_Zn2_S29_R2_001	0.4117193950343003	0.26871819507687383
