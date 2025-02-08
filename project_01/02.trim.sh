@@ -5,6 +5,7 @@
 mkdir trimmed_reads
 
 # Trim Cont1
+# Trimmomatic Wall time: 19min 37s, Wall time: 20min 45s
 trimmomatic PE \
   Tien_Cont1_S25_R1_001.fastq.gz Tien_Cont1_S25_R2_001.fastq.gz \
   trimmed_reads/Cont1_R1_paired.fastq.gz trimmed_reads/Cont1_R1_unpaired.fastq.gz \

@@ -33,30 +33,45 @@ mkdir alignments
 
 # Build HISAT2 index
 # conda install hisat2 -y
+# HISAT Wall time: 14min 14s
 hisat2-build gencode.v47lift37.transcripts.fa hisat2_index/genome_index
 
-# Align Cont1
+# Not worked
 hisat2 -p 8 \
-  -x hisat2_index/genome_index \
-  -1 trimmed_reads/Cont1_R1_paired.fastq.gz \
-  -2 trimmed_reads/Cont1_R2_paired.fastq.gz \
-  -S alignments/Cont1.sam \
-  --summary-file alignments/Cont1_alignment_summary.txt
+-x hisat2_index/genome_index \
+-1 trimmed_reads/Cont1_R1_paired.fastq.gz \
+-2 trimmed_reads/Cont1_R2_paired.fastq.gz \
+-S alignments/Cont1.sam \
+--summary-file alignments/Cont1_alignment_summary.txt \
+| samtools view -bS - \
+| samtools sort - -o alignments/Cont1.sorted.bam
 
-# Align Zn2
 hisat2 -p 8 \
-  -x hisat2_index/genome_index \
-  -1 trimmed_reads/Zn2_R1_paired.fastq.gz \
-  -2 trimmed_reads/Zn2_R2_paired.fastq.gz \
-  -S alignments/Zn2.sam \
-  --summary-file alignments/Zn2_alignment_summary.txt
+-x hisat2_index/genome_index \
+-1 trimmed_reads/Zn2_R1_paired.fastq.gz \
+-2 trimmed_reads/Zn2_R2_paired.fastq.gz \
+-S alignments/Zn2.sam \
+--summary-file alignments/Zn2_alignment_summary.txt \
+| samtools view -bS - \
+| samtools sort - -o alignments/Zn2.sorted.bam
 
-# Convert SAM to BAM, sort, and index
-# conda install bioconda::samtools -y
-for sample in Cont1 Zn2
-do
-    samtools view -bS alignments/${sample}.sam > alignments/${sample}.bam
-    samtools sort alignments/${sample}.bam -o alignments/${sample}.sorted.bam
-    samtools index alignments/${sample}.sorted.bam
-    rm alignments/${sample}.sam  # Remove SAM file to save space
-done
+# Worked
+# HISAT alignment Wall time: 1h 3min 27s Wall time: 1h 2min 3s
+hisat2 -p 8 \
+-x hisat2_index/genome_index \
+-1 trimmed_reads/Cont1_R1_paired.fastq.gz \
+-2 trimmed_reads/Cont1_R2_paired.fastq.gz \
+| samtools view -bS - \
+| samtools sort - -o alignments/Cont1.sorted.bam  
+
+hisat2 -p 8 \
+-x hisat2_index/genome_index \
+-1 trimmed_reads/Zn2_R1_paired.fastq.gz \
+-2 trimmed_reads/Zn2_R2_paired.fastq.gz \
+| samtools view -bS - \
+| samtools sort - -o alignments/Zn2.sorted.bam  
+
+
+# Index the BAM files
+samtools index alignments/Cont1.sorted.bam
+samtools index alignments/Zn2.sorted.bam
