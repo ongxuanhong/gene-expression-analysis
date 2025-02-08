@@ -52,6 +52,7 @@ hisat2 -p 8 \
   --summary-file alignments/Zn2_alignment_summary.txt
 
 # Convert SAM to BAM, sort, and index
+# conda install bioconda::samtools -y
 for sample in Cont1 Zn2
 do
     samtools view -bS alignments/${sample}.sam > alignments/${sample}.bam
