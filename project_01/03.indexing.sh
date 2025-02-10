@@ -4,10 +4,22 @@
 # wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_47/GRCh37_mapping/gencode.v47lift37.transcripts.fa.gz
 # GTF annotation
 # wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_47/GRCh37_mapping/gencode.v47lift37.annotation.gtf.gz
+# For hg38 (GRCh38) - Release 44
+# Genome sequence
+mkdir reference && cd reference
 
-# Uncompress
-gunzip gencode.v47lift37.transcripts.fa.gz &&
-gunzip gencode.v47lift37.annotation.gtf.gz
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_44/GRCh38.primary_assembly.genome.fa.gz
+# Gene annotation
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_44/gencode.v44.annotation.gtf.gz
+
+# For hg19 (GRCh37) - Release 19
+# Genome sequence
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/GRCh37.p13.genome.fa.gz
+# Gene annotation
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
+
+# Decompress all files
+gunzip *.gz
 
 # https://github.com/alexdobin/STAR
 # Get latest STAR source from releases
@@ -35,25 +47,6 @@ mkdir alignments
 # conda install hisat2 -y
 # HISAT Wall time: 14min 14s
 hisat2-build gencode.v47lift37.transcripts.fa hisat2_index/genome_index
-
-# Not worked
-hisat2 -p 8 \
--x hisat2_index/genome_index \
--1 trimmed_reads/Cont1_R1_paired.fastq.gz \
--2 trimmed_reads/Cont1_R2_paired.fastq.gz \
--S alignments/Cont1.sam \
---summary-file alignments/Cont1_alignment_summary.txt \
-| samtools view -bS - \
-| samtools sort - -o alignments/Cont1.sorted.bam
-
-hisat2 -p 8 \
--x hisat2_index/genome_index \
--1 trimmed_reads/Zn2_R1_paired.fastq.gz \
--2 trimmed_reads/Zn2_R2_paired.fastq.gz \
--S alignments/Zn2.sam \
---summary-file alignments/Zn2_alignment_summary.txt \
-| samtools view -bS - \
-| samtools sort - -o alignments/Zn2.sorted.bam
 
 # Worked
 # HISAT alignment Wall time: 1h 3min 27s Wall time: 1h 2min 3s
