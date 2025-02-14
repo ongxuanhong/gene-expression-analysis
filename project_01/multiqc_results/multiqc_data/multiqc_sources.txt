@@ -1,5 +1,0 @@
-Module	Section	Sample Name	Source
-FastQC	all_sections	Tien_Zn2_S29_R2_001	/Users/hongong/working/vsob3/gene-expression-analysis/project_01/fastqc_results/Tien_Zn2_S29_R2_001_fastqc.zip
-FastQC	all_sections	Tien_Zn2_S29_R1_001	/Users/hongong/working/vsob3/gene-expression-analysis/project_01/fastqc_results/Tien_Zn2_S29_R1_001_fastqc.zip
-FastQC	all_sections	Tien_Cont1_S25_R2_001	/Users/hongong/working/vsob3/gene-expression-analysis/project_01/fastqc_results/Tien_Cont1_S25_R2_001_fastqc.zip
-FastQC	all_sections	Tien_Cont1_S25_R1_001	/Users/hongong/working/vsob3/gene-expression-analysis/project_01/fastqc_results/Tien_Cont1_S25_R1_001_fastqc.zip
